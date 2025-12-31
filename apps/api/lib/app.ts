@@ -19,11 +19,11 @@ const appRouter = router({
   organization: organizationRouter,
 });
 
-app.route("/api/agent", agentRouter);
-app.route("/api/config", configRouter);
-
 // HTTP router
 const app = new Hono<AppContext>();
+
+app.route("/api/agent", agentRouter);
+app.route("/api/config", configRouter);
 
 app.get("/", (c) => c.redirect("/api"));
 
