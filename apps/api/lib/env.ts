@@ -17,6 +17,9 @@ export const envSchema = z.object({
   OPENAI_API_KEY: z.string(),
   RESEND_API_KEY: z.string(),
   RESEND_EMAIL_FROM: z.email(),
+  ORCHESTRATOR: z.any(),
+  ANALYST: z.any(),
+  JUDGE: z.any(),
 });
 
 /**
