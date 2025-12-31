@@ -1,3 +1,4 @@
+
 /**
  * @file Cloudflare Workers entrypoint.
  *
@@ -10,6 +11,10 @@ import { createAuth } from "./lib/auth.js";
 import type { AppContext } from "./lib/context.js";
 import { createDb } from "./lib/db.js";
 import type { Env } from "./lib/env.js";
+import { OrchestratorAgent } from "./lib/agents/orchestrator.js";
+import { GithubAnalystAgent } from "./lib/agents/analyst.js";
+import { JudgeAgent } from "./lib/agents/judge.js";
+
 
 type CloudflareEnv = {
   HYPERDRIVE_CACHED: Hyperdrive;
@@ -39,7 +44,23 @@ worker.use("*", async (c, next) => {
   await next();
 });
 
+
+worker.get("/api/agent/connect", (c) => {
+    const requestId = c.req.query("requestId");
+    if (!requestId) {
+        return c.json({ error: "requestId is required" }, 400);
+    }
+
+    const orchestrator = c.env.ORCHESTRATOR.get(
+        c.env.ORCHESTRATOR.idFromName(requestId),
+    );
+    return orchestrator.fetch(c.req.raw);
+});
+
+
 // Mount the core API app
 worker.route("/", app);
 
 export default worker;
+
+export { OrchestratorAgent, GithubAnalystAgent, JudgeAgent };

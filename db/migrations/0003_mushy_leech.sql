@@ -1,0 +1,1 @@
+ALTER TABLE "search_configs" ADD COLUMN "repos_to_analyze" integer DEFAULT 20 NOT NULL;

@@ -38,6 +38,21 @@
   ],
   "kv_namespaces": [],
 
+  "durable_objects": {
+    "bindings": [
+      { "name": "ORCHESTRATOR", "class_name": "OrchestratorAgent" },
+      { "name": "ANALYST", "class_name": "GithubAnalystAgent" },
+      { "name": "JUDGE", "class_name": "JudgeAgent" }
+    ]
+  },
+
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["OrchestratorAgent", "GithubAnalystAgent", "JudgeAgent"]
+    }
+  ],
+
   "env": {
     // [ENV:DEVELOPMENT]
     // Command: bun wrangler dev

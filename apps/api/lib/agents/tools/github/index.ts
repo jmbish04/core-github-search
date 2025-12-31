@@ -343,6 +343,26 @@ export const getGithubTools = (env: Bindings) => {
                 });
                 return data;
             }
+        },
+
+        // ==========================================
+        // Repos
+        // ==========================================
+        {
+            name: "github_get_repo",
+            description: "Get repository details.",
+            parameters: z.object({
+                owner: z.string(),
+                repo: z.string(),
+            }),
+            execute: async (args: { owner: string, repo: string }) => {
+                const octokit = getOctokit(env);
+                const { data } = await octokit.rest.repos.get({
+                    owner: args.owner,
+                    repo: args.repo,
+                });
+                return data;
+            }
         }
     ];
 };

@@ -10,12 +10,17 @@ import type { AppContext } from "./context.js";
 import { router } from "./trpc.js";
 import { organizationRouter } from "../routers/organization.js";
 import { userRouter } from "../routers/user.js";
+import { agentRouter } from "../routers/agent.js";
+import { configRouter } from "../routers/config.js";
 
 // tRPC API router
 const appRouter = router({
   user: userRouter,
   organization: organizationRouter,
 });
+
+app.route("/api/agent", agentRouter);
+app.route("/api/config", configRouter);
 
 // HTTP router
 const app = new Hono<AppContext>();
