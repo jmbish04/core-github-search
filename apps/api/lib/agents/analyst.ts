@@ -24,7 +24,7 @@ export class GithubAnalystAgent extends BaseAgent<Env, AnalystState> {
             if (request.headers.get("Upgrade") !== "websocket")
                 return new Response("Expected websocket", { status: 400 });
             const pair = new WebSocketPair();
-            const [client, server] = [pair[0], pair[1]];
+            const [client, server] = Object.values(pair) as [WebSocket, WebSocket];
             this.ctx.acceptWebSocket(server);
             server.send(JSON.stringify({ type: "hello", msg: "connected" }));
             return new Response(null, { status: 101, webSocket: client });
