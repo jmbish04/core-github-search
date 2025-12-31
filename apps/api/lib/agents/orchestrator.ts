@@ -27,7 +27,7 @@ export class OrchestratorAgent extends BaseAgent<Env, OrchestratorState> {
             if (request.headers.get("Upgrade") !== "websocket")
                 return new Response("Expected websocket", { status: 400 });
             const pair = new WebSocketPair();
-            const [client, server] = Object.values(pair) as [WebSocket, WebSocket];
+            const [client, server] = [pair[0], pair[1]];
             this.ctx.acceptWebSocket(server);
             server.send(JSON.stringify({ type: "hello", msg: "connected" }));
             return new Response(null, { status: 101, webSocket: client });
