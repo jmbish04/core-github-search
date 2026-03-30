@@ -23,13 +23,13 @@
   "dependencies": {
     "@react-email/components": "^1.0.1",
     "@react-email/render": "^2.0.0",
-    "react": "19.2.1"
+    "react": "19.2.4"
   },
   "devDependencies": {
     "react-email": "^5.0.5",
     "@react-email/preview-server": "^5.0.5",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^19.2.7",
-    "typescript": "~5.9.3"
+    "typescript": "~6.0.2"
   }
 }
